@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	swagBot.setSafetyEnabled(true);
     	for(int i=0; i < 1; i++){
-    		swagBot.tankDrive(-0.5, 0.5);
+    		swagBot.arcadeDrive(-0.5, 0.5);
     		Timer.delay(1.0);
     	}
     }
@@ -59,19 +59,23 @@ public class Robot extends IterativeRobot {
         	double rightSpeed = joystick2.getY();
         	if (leftSpeed>=0){
         		leftSpeed = leftSpeed * leftSpeed;
+        		leftSpeed = leftSpeed / 2;
         	}
         	else if (leftSpeed<0){
         		leftSpeed = leftSpeed * leftSpeed;
+        		leftSpeed = leftSpeed  / 2;
         		leftSpeed = -1 * leftSpeed;
         	}
         	if (rightSpeed>=0){
         		rightSpeed = rightSpeed * rightSpeed;
+        		rightSpeed = rightSpeed / 2;
         	}
         	else if (rightSpeed<0){
         		rightSpeed = rightSpeed * rightSpeed;
+        		rightSpeed = rightSpeed / 2;
         		rightSpeed = -1 * rightSpeed;
         	}
-        	swagBot.tankDrive(leftSpeed, rightSpeed);
+        	swagBot.arcadeDrive(leftSpeed, rightSpeed);
         	//scoop.set(armstick.getY());
         	Timer.delay(0.005);
         	
