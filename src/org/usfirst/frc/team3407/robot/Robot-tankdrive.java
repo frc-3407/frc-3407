@@ -32,7 +32,8 @@ public class Robot extends IterativeRobot {
     	//scoop = new Talon(2);
     	swagBot.setExpiration(0.1);
     	joystick1 = new Joystick(0);
-    	//joystick2 = new Joystick(1);
+    	joystick2 = new Joystick(1);
+    	//armstick = new Joystick(2);
     }
 
     /**
@@ -42,7 +43,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
     	swagBot.setSafetyEnabled(true);
     	for(int i=0; i < 1; i++){
-    		swagBot.arcadeDrive(-0.5, 0.5);
+    		swagBot.tankDrive(-0.5, 0.5);
     		Timer.delay(1.0);
     	}
     }
@@ -54,28 +55,28 @@ public class Robot extends IterativeRobot {
         swagBot.setSafetyEnabled(true);
         //scoop.setSafetyEnabled(true);
         while(isOperatorControl() && isEnabled()){
-        	double forwardSpeed = joystick1.getY();
-        	double turnSpeed = joystick1.getX();
-        	if (forwardSpeed>=0){
-        		forwardSpeed = forwardSpeed * forwardSpeed;
-        		forwardSpeed = forwardSpeed / 2;
+        	double leftSpeed = joystick1.getY();
+        	double rightSpeed = joystick2.getY();
+        	if (leftSpeed>=0){
+        		leftSpeed = leftSpeed * leftSpeed;
+        		leftSpeed = leftSpeed / 2;
         	}
-        	else if (forwardSpeed<0){
-        		forwardSpeed = forwardSpeed * forwardSpeed;
-        		forwardSpeed = forwardSpeed  / 2;
-        		forwardSpeed = -1 * forwardSpeed;
+        	else if (leftSpeed<0){
+        		leftSpeed = leftSpeed * leftSpeed;
+        		leftSpeed = leftSpeed  / 2;
+        		leftSpeed = -1 * leftSpeed;
         	}
-        	if (turnSpeed>=0){
-        		turnSpeed = turnSpeed * turnSpeed;
-        		turnSpeed = turnSpeed / 2;
+        	if (rightSpeed>=0){
+        		rightSpeed = rightSpeed * rightSpeed;
+        		rightSpeed = rightSpeed / 2;
         	}
-        	else if (turnSpeed<0){
-        		turnSpeed = turnSpeed * turnSpeed;
-        		turnSpeed = turnSpeed / 2;
-        		turnSpeed = -1 * turnSpeed;
+        	else if (rightSpeed<0){
+        		rightSpeed = rightSpeed * rightSpeed;
+        		rightSpeed = rightSpeed / 2;
+        		rightSpeed = -1 * rightSpeed;
         	}
-        	swagBot.arcadeDrive(forwardSpeed, turnSpeed);
-        	//scoop.set(joystick2.getY());
+        	swagBot.tankDrive(leftSpeed, rightSpeed);
+        	//scoop.set(armstick.getY());
         	Timer.delay(0.005);
         	
         }
