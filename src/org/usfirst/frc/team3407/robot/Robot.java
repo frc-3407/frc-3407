@@ -19,19 +19,21 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-	SpeedController scoop; //Controls the arm on the scoop pwm:2
+	//SpeedController scoop; //Controls the arm on the scoop pwm:2
 	RobotDrive swagBot;
 	Joystick joystick1;
 	Joystick joystick2;
 	Joystick armstick;
 	
-    public void robotInit() {
+    
+	public void robotInit() {
+		this.
     	swagBot = new RobotDrive(0,1);
-    	scoop = new Talon(2);
+    	//scoop = new Talon(2);
     	swagBot.setExpiration(0.1);
     	joystick1 = new Joystick(0);
     	joystick2 = new Joystick(1);
-    	armstick = new Joystick(2);
+    	//armstick = new Joystick(2);
     }
 
     /**
@@ -51,7 +53,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         swagBot.setSafetyEnabled(true);
-        scoop.setSafetyEnabled(true);
+        //scoop.setSafetyEnabled(true);
         while(isOperatorControl() && isEnabled()){
         	double leftSpeed = joystick1.getY();
         	double rightSpeed = joystick2.getY();
@@ -70,7 +72,7 @@ public class Robot extends IterativeRobot {
         		rightSpeed = -1 * rightSpeed;
         	}
         	swagBot.tankDrive(leftSpeed, rightSpeed);
-        	scoop.set(armstick.getY());
+        	//scoop.set(armstick.getY());
         	Timer.delay(0.005);
         	
         }
