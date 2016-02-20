@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
     	swagBot.setSafetyEnabled(true);
     	for(int i=0; i < 1; i++){
     		swagBot.arcadeDrive(-0.5, 0.5);
-    		Timer.delay(1.0);
+    		Timer.delay(0.005);
     	}
     }
 
