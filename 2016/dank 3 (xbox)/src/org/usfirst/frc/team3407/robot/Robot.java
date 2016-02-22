@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
         		straight.arcadeDrive(-speedReverse, turn);
         	}
         	else{
-        		straight.arcadeDrive(0, turn)
+        		straight.arcadeDrive(0, turn);
         	}
         	
         	
