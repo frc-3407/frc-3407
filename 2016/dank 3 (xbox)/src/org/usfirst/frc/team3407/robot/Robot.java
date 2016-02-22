@@ -83,9 +83,13 @@ public class Robot extends IterativeRobot {
         	if(speedForward > 0){
         	straight.arcadeDrive(speedForward, turn);
         	}
-        	if(speedReverse > 0){
+        	else if(speedReverse < 0){
         		straight.arcadeDrive(-speedReverse, turn);
         	}
+        	else{
+        		straight.arcadeDrive(0, turn)
+        	}
+        	
         	
         	//Rotate scooper to pick up and release the ball.
         	if (LY > 0) {
