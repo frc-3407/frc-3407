@@ -6,7 +6,12 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.communication.UsageReporting;
+import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tInstances;
+import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary.tResourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -16,7 +21,47 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    /**
+	
+	//These values are used to control the power to the individual motors so that arcade works correctly.
+	double leftMotorConst = 1;
+	double rightMotorConst = 0.8;//change this value for motor tuning must be < 1 and > 0
+	
+	public double conLimit(double num) {
+		if(num>1) return 1;
+		if(num<-1) return -1;
+		return num;
+	}
+
+	public void ArcadeDrive(double moveValue, double rotateValue){
+	    
+	    double leftMotorSpeed;
+	    double rightMotorSpeed;
+
+	    moveValue = conLimit(moveValue);
+	    rotateValue = conLimit(rotateValue);
+
+	    if (moveValue > 0.0) {
+	      if (rotateValue > 0.0) {
+	        leftMotorSpeed = moveValue - rotateValue;
+	        rightMotorSpeed = Math.max(moveValue, rotateValue);
+	      } else {
+	        leftMotorSpeed = Math.max(moveValue, -rotateValue);
+	        rightMotorSpeed = moveValue + rotateValue;
+	      }
+	    } else {
+	      if (rotateValue > 0.0) {
+	        leftMotorSpeed = -Math.max(-moveValue, rotateValue);
+	        rightMotorSpeed = moveValue + rotateValue;
+	      } else {
+	        leftMotorSpeed = moveValue - rotateValue;
+	        rightMotorSpeed = -Math.max(-moveValue, -rotateValue);
+	      }
+	    }
+
+	    straight.setLeftRightMotorOutputs(leftMotorSpeed * leftMotorConst, rightMotorSpeed * rightMotorConst);
+	}
+	
+	/**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
@@ -70,6 +115,8 @@ public class Robot extends IterativeRobot {
         	//Sets axis for turning the robot
         	double turn = -xboxGreen.getRawAxis(4);
         	
+        	
+        	//dpad? maybe
         	//double dPad = xboxGreen.getRawAxis(5);
         	
         	//Sets the LB button
@@ -81,13 +128,13 @@ public class Robot extends IterativeRobot {
         	//SmartDashboard.putNumber("Slider 0", xboxGreen.getRawAxis(5));
         	//Sets drive mode to arcade drive with speed being the forward speed and turn being rotation
         	if(speedForward > 0){
-        	straight.arcadeDrive(speedForward, turn);
+        		ArcadeDrive(speedForward, turn);
         	}
-        	else if(speedReverse < 0){
-        		straight.arcadeDrive(-speedReverse, turn);
+        	else if(speedReverse > 0){
+        		ArcadeDrive(-speedReverse, turn);
         	}
         	else{
-        		straight.arcadeDrive(0, turn);
+        		ArcadeDrive(0, turn);
         	}
         	
         	

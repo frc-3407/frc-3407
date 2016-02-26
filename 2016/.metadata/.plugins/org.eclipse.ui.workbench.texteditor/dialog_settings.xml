@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="LY" key="selection"/>
+		<item value="Victor" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="victor"/>
+			<item value="armstick"/>
+			<item value="joystick2"/>
+			<item value="joystick1"/>
 			<item value="scooper"/>
 			<item value="`"/>
 			<item value="xboxgreen"/>
 			<item value="talon"/>
-			<item value="vic"/>
-			<item value="mot"/>
-			<item value="mo"/>
-			<item value="motor"/>
 		</list>
 		<list key="replacehistory">
+			<item value="armStick"/>
+			<item value="rightStick"/>
+			<item value="leftStick"/>
+			<item value="joystickDrive"/>
 			<item value="LY"/>
 			<item value="xboxGreen"/>
 			<item value="turn"/>
 			<item value="forward"/>
-			<item value="tankDrive"/>
-			<item value="arcadeDrive"/>
-			<item value=""/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
